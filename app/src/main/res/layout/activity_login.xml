@@ -18,6 +18,7 @@
         android:layout_marginEnd="30dp"
         android:text="Let's get you"
         android:textColor="@color/white"
+        android:layout_alignParentTop="true"
         android:textSize="38sp"
         android:textStyle="bold"
         app:carbon_font="@font/plus_jakarta" />
@@ -46,7 +47,7 @@
         android:layout_marginEnd="30dp"
         android:text="Enter your mobile number and we'll send\nyou a one-time code to verify it's you."
         android:textColor="#C6C9C7"
-        android:textSize="15sp" />
+        android:textSize="17sp" />
 
     <carbon.widget.TextView
         android:id="@+id/constText4"
@@ -132,7 +133,7 @@
 
         <carbon.widget.TextView
             android:id="@+id/signupText"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
             android:text="Sign up"
