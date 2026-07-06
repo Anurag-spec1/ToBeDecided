@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<carbon.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bg"
+    tools:context=".activity.LoginActivity">
+
+    <carbon.widget.TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="250dp"
+        android:text="Let's get you"
+        android:textColor="@color/white"
+        android:textSize="35sp"
+        android:id="@+id/constText1"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        app:carbon_font="@font/plus_jakarta"/>
+
+    <carbon.widget.TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/constText1"
+        android:id="@+id/constText2"
+        android:textSize="35sp"
+        android:layout_marginTop="-10dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:textColor="#36DA77"
+        android:text="signed in"
+        android:textStyle="italic"
+        app:carbon_font="@font/plus_jakarta"/>
+
+    <carbon.widget.TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/constText2"
+        android:id="@+id/constText3"
+        android:textColor="#C6C9C7"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:textSize="15sp"
+        android:fontFamily="sans-serif"
+        android:layout_marginTop="10dp"
+        android:text="Enter your mobile number and we'll send\nyou a one-time code to verify it's you."/>
+
+
+</carbon.widget.RelativeLayout>
