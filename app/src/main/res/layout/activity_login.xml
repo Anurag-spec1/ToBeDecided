@@ -4,75 +4,75 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:fitsSystemWindows="true"
     android:layout_height="match_parent"
     android:background="@drawable/login_bg"
+    android:fitsSystemWindows="true"
     tools:context=".activity.LoginActivity">
 
     <carbon.widget.TextView
+        android:id="@+id/constText1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="250dp"
+        android:layout_marginEnd="30dp"
         android:text="Let's get you"
         android:textColor="@color/white"
-        android:textSize="35sp"
-        android:id="@+id/constText1"
+        android:textSize="38sp"
         android:textStyle="bold"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        app:carbon_font="@font/plus_jakarta"/>
+        app:carbon_font="@font/plus_jakarta" />
 
     <carbon.widget.TextView
+        android:id="@+id/constText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/constText1"
-        android:id="@+id/constText2"
-        android:textSize="35sp"
-        android:layout_marginTop="-10dp"
         android:layout_marginStart="30dp"
+        android:layout_marginTop="-5dp"
         android:layout_marginEnd="30dp"
-        android:textColor="#36DA77"
         android:text="signed in"
-        android:textStyle="italic"
-        app:carbon_font="@font/plus_jakarta"/>
+        android:textColor="#36DA77"
+        android:textSize="38sp"
+        android:textStyle="italic |bold"
+        app:carbon_font="@font/plus_jakarta" />
 
     <carbon.widget.TextView
+        android:id="@+id/constText3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/constText2"
-        android:id="@+id/constText3"
-        android:textColor="#C6C9C7"
         android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="30dp"
-        android:textSize="15sp"
-        app:carbon_font=""
-        android:layout_marginTop="5dp"
-        android:text="Enter your mobile number and we'll send\nyou a one-time code to verify it's you."/>
+        android:text="Enter your mobile number and we'll send\nyou a one-time code to verify it's you."
+        android:textColor="#C6C9C7"
+        android:textSize="15sp" />
 
     <carbon.widget.TextView
+        android:id="@+id/constText4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/constText3"
-        android:id="@+id/constText4"
-        app:carbon_font="@font/plus_jakarta"
         android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
         android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
         android:text="Mobile number"
-        android:textStyle="bold"
-        android:textColor="#F2F2F2"/>
+        android:textColor="#F2F2F2"
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
     <carbon.widget.LinearLayout
+        android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginHorizontal="30dp"
-        app:carbon_cornerRadius="15dp"
-        app:carbon_strokeWidth="1dp"
-        app:carbon_stroke="#2ED86F"
         android:layout_below="@id/constText4"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="10dp"
+        android:background="#001111"
         android:orientation="horizontal"
-        android:layout_marginTop="15dp"
-        android:id="@+id/linearLayout1">
+        app:carbon_cornerRadius="15dp"
+        app:carbon_stroke="#2ED86F"
+        app:carbon_strokeWidth="1dp">
 
         <carbon.widget.ImageView
             android:layout_width="32dp"
@@ -80,85 +80,84 @@
             android:layout_gravity="center_vertical"
             android:layout_marginStart="15dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/ind"/>
+            android:src="@drawable/ind" />
 
         <carbon.widget.TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="+91"
             android:layout_gravity="center_vertical"
-            android:textSize="20sp"
+            android:layout_marginStart="13dp"
+            android:text="+91"
             android:textColor="@color/white"
-            android:layout_marginStart="13dp"/>
+            android:textSize="20sp" />
 
         <carbon.widget.TextView
             android:layout_width="3dp"
             android:layout_height="30dp"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="20dp"
-            android:background="#4B5A54"/>
+            android:background="#4B5A54" />
 
         <carbon.widget.EditText
+            android:id="@+id/etPhone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#001111"
-            android:textColor="@color/white"
             android:layout_gravity="center_vertical"
-            android:paddingHorizontal="20dp"
-            android:textSize="20sp"
-            android:hint="8757772761"
-            android:textColorHint="@color/white"
+            android:background="#001111"
+            android:hint="87XXXXXX61"
             android:inputType="phone"
-            android:id="@+id/etPhone"/>
+            android:paddingHorizontal="20dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/carbon_white_50"
+            android:textSize="20sp" />
 
     </carbon.widget.LinearLayout>
 
     <carbon.widget.LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:id="@+id/linearLayout2"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp">
-
-    <carbon.widget.TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#B9B9B9"
-        android:textSize="17sp"
-        android:text="Don't have an account? "
-        android:id="@+id/constText5"/>
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:orientation="horizontal">
 
         <carbon.widget.TextView
+            android:id="@+id/constText5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Don't have an account?  "
+            android:textColor="#B9B9B9"
+            android:textSize="17sp" />
+
+        <carbon.widget.TextView
+            android:id="@+id/signupText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="17sp"
             android:clickable="true"
-            android:id="@+id/signupText"
+            android:text="Sign up"
             android:textColor="#35DA76"
-            android:text="SignUp"/>
+            android:textSize="17sp" />
 
     </carbon.widget.LinearLayout>
 
 
     <carbon.widget.TextView
+        android:id="@+id/sendOtp"
         android:layout_width="match_parent"
-        android:layout_height="65dp"
+        android:layout_height="57dp"
         android:layout_above="@id/linearLayout2"
         android:layout_marginHorizontal="30dp"
         android:layout_marginVertical="20dp"
-        app:carbon_cornerRadius="10dp"
         android:background="@drawable/bg_button_gradient"
-        android:textColor="#09110d"
+        android:clickable="true"
         android:gravity="center"
         android:text="Send OTP"
-        android:textSize="22sp"
+        android:textColor="#09110d"
+        android:textSize="18sp"
         android:textStyle="bold"
-        android:clickable="true"
-        app:carbon_elevation="5dp"
-        android:id="@+id/sendOtp"/>
-
+        app:carbon_cornerRadius="5dp"
+        app:carbon_elevation="5dp" />
 
 
 </carbon.widget.RelativeLayout>
