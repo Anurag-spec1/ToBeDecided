@@ -37,6 +37,10 @@ class VerifyOtp : AppCompatActivity() {
             startTimer()
         }
 
+        binding.verifyOtp.setOnClickListener {
+            startActivity(Intent(this,MainActivity::class.java))
+        }
+
     }
 
     private fun startTimer() {
