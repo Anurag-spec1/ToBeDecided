@@ -95,7 +95,6 @@
                     android:background="#001111"
                     android:hint="Anurag Shrivastav"
                     android:inputType="text"
-                    android:maxLength="20"
                     android:paddingHorizontal="20dp"
                     android:textColor="@color/white"
                     android:textColorHint="@color/carbon_white_50"

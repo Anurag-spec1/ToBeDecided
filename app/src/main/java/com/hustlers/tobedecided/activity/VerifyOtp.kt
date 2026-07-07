@@ -23,10 +23,11 @@ class VerifyOtp : AppCompatActivity() {
         setContentView(binding.root)
 
         val phoneNumber = intent.getStringExtra("phone") ?: ""
+        val isNavigatedFromSignup = intent.getBooleanExtra("fromSignupActivity",false)
         binding.constTextNumber.text = "Code sent to +91 $phoneNumber"
 
-        binding.signupText.setOnClickListener {
-            startActivity(Intent(this, SignupActivity::class.java))
+        if (isNavigatedFromSignup){
+            binding.verifyOtp.text="Verify & Signup"
         }
 
         setupOtp()
