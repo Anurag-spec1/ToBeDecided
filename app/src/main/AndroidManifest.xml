@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ToBeDecided">
         <activity
+            android:name=".activity.DevProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.SignupActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
