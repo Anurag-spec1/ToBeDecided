@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<carbon.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@drawable/login_bg"
+    tools:context=".activity.SignupActivity">
+
+    <carbon.widget.TextView
+        android:id="@+id/constText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="240dp"
+        android:layout_marginEnd="30dp"
+        android:text="Let's get you"
+        android:textColor="@color/white"
+        android:layout_alignParentTop="true"
+        android:textSize="38sp"
+        android:textStyle="bold"
+        app:carbon_font="@font/plus_jakarta" />
+
+    <carbon.widget.TextView
+        android:id="@+id/constText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/constText1"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="-5dp"
+        android:layout_marginEnd="30dp"
+        android:text="signed up"
+        android:textColor="#36DA77"
+        android:textSize="38sp"
+        android:textStyle="italic|bold"
+        app:carbon_font="@font/plus_jakarta" />
+
+    <carbon.widget.TextView
+        android:id="@+id/constText3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/constText2"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:text="Create an account to get started."
+        android:textColor="#C6C9C7"
+        android:textSize="17sp" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/constText3"
+        android:layout_above="@id/sendOtp"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <carbon.widget.LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <carbon.widget.TextView
+                android:id="@+id/constText0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="30dp"
+                android:text="Full name"
+                android:textColor="#F2F2F2"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <carbon.widget.LinearLayout
+                android:id="@+id/linearLayout0"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="10dp"
+                android:background="#001111"
+                android:orientation="horizontal"
+                app:carbon_cornerRadius="15dp"
+                app:carbon_stroke="#2ED86F"
+                app:carbon_strokeWidth="1dp">
+
+                <carbon.widget.EditText
+                    android:id="@+id/etFullName"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:background="#001111"
+                    android:hint="Anurag Shrivastav"
+                    android:inputType="text"
+                    android:maxLength="20"
+                    android:paddingHorizontal="20dp"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/carbon_white_50"
+                    android:textSize="20sp" />
+
+            </carbon.widget.LinearLayout>
+
+            <carbon.widget.TextView
+                android:id="@+id/constText4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="30dp"
+                android:text="Mobile number"
+                android:textColor="#F2F2F2"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <carbon.widget.LinearLayout
+                android:id="@+id/linearLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="10dp"
+                android:background="#001111"
+                android:orientation="horizontal"
+                app:carbon_cornerRadius="15dp"
+                app:carbon_stroke="#2ED86F"
+                app:carbon_strokeWidth="1dp">
+
+                <carbon.widget.ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="15dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ind" />
+
+                <carbon.widget.TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="13dp"
+                    android:text="+91"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+                <carbon.widget.TextView
+                    android:layout_width="3dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="20dp"
+                    android:background="#4B5A54" />
+
+                <carbon.widget.EditText
+                    android:id="@+id/etPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:background="#001111"
+                    android:hint="87XXXXXX61"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:paddingHorizontal="20dp"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/carbon_white_50"
+                    android:textSize="20sp" />
+
+            </carbon.widget.LinearLayout>
+
+        </carbon.widget.LinearLayout>
+    </ScrollView>
+
+    <carbon.widget.LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:orientation="horizontal">
+
+        <carbon.widget.TextView
+            android:id="@+id/constText5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Already have an account?  "
+            android:textColor="#B9B9B9"
+            android:textSize="17sp" />
+
+        <carbon.widget.TextView
+            android:id="@+id/signinText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:text="Sign in"
+            android:textColor="#35DA76"
+            android:textSize="17sp" />
+
+    </carbon.widget.LinearLayout>
+
+    <carbon.widget.TextView
+        android:id="@+id/sendOtp"
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:layout_above="@id/linearLayout2"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginVertical="20dp"
+        android:background="@drawable/bg_button_gradient"
+        android:clickable="true"
+        android:gravity="center"
+        android:text="Create account"
+        android:textColor="#09110d"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:carbon_cornerRadius="5dp"
+        app:carbon_elevation="5dp" />
+
+</carbon.widget.RelativeLayout>

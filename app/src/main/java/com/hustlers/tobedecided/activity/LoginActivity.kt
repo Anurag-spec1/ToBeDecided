@@ -15,6 +15,10 @@ class LoginActivity : AppCompatActivity() {
 
         setupPhoneValidation()
 
+        binding.signupText.setOnClickListener {
+            startActivity(Intent(this, SignupActivity::class.java))
+        }
+
     }
 
     private fun setupPhoneValidation() {

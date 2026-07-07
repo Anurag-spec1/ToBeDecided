@@ -1,5 +1,6 @@
 package com.hustlers.tobedecided.activity
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -24,6 +25,10 @@ class VerifyOtp : AppCompatActivity() {
         val phoneNumber = intent.getStringExtra("phone") ?: ""
         binding.constTextNumber.text = "Code sent to +91 $phoneNumber"
 
+        binding.signupText.setOnClickListener {
+            startActivity(Intent(this, SignupActivity::class.java))
+        }
+
         setupOtp()
         startTimer()
 
@@ -36,7 +41,7 @@ class VerifyOtp : AppCompatActivity() {
     private fun startTimer() {
 
         binding.timer.visibility = View.VISIBLE
-        binding.resend.text = "Resend code in "
+        binding.resend.text = "\uD83D\uDD65 Resend code in "
         binding.resend.setTextColor(Color.parseColor("#808080"))
         binding.resend.isClickable = false
         binding.resend.isEnabled = false

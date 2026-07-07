@@ -12,10 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ToBeDecided">
         <activity
+            android:name=".activity.SignupActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.VerifyOtp"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.LoginActivity"
             android:configChanges="orientation|screenSize"
