@@ -6,8 +6,17 @@
     android:id="@+id/main"
     android:background="#0D0D0D"
     android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity">
 
+
+    <androidx.compose.ui.platform.ComposeView
+        android:id="@+id/composeBottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginBottom="32dp" />
 
 </carbon.widget.RelativeLayout>

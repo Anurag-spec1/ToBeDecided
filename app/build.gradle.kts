@@ -1,13 +1,12 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {
     namespace = "com.hustlers.tobedecided"
-    compileSdk {
-        version = release(36)
-    }
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.hustlers.tobedecided"
@@ -19,9 +18,11 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    buildFeatures{
+    buildFeatures {
         viewBinding = true
+        compose = true
     }
+
 
     buildTypes {
         release {
@@ -53,4 +54,13 @@ dependencies {
 
     //carbon library
     api("tk.zielony:carbon:0.16.0.1")
+
+    // Compose with BOM
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.material3)
+    implementation(libs.androidx.material.icons.extended)
+    implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.animation)
+    implementation(libs.androidx.activity.compose)
 }
