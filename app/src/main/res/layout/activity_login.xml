@@ -34,7 +34,7 @@
         android:text="signed in"
         android:textColor="#36DA77"
         android:textSize="38sp"
-        android:textStyle="italic |bold"
+        android:textStyle="italic|bold"
         app:carbon_font="@font/plus_jakarta" />
 
     <carbon.widget.TextView
@@ -106,7 +106,8 @@
             android:layout_gravity="center_vertical"
             android:background="#001111"
             android:hint="87XXXXXX61"
-            android:inputType="phone"
+            android:inputType="number"
+            android:maxLength="10"
             android:paddingHorizontal="20dp"
             android:textColor="@color/white"
             android:textColorHint="@color/carbon_white_50"
