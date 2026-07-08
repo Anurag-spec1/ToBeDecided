@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="GlowBorderView">
+        <attr name="cornerRadius" format="dimension" />
+        <attr name="borderColor" format="color" />
+        <attr name="glowColor" format="color" />
+        <attr name="glowLength" format="float" />
+        <attr name="strokeWidth" format="dimension" />
+    </declare-styleable>
+</resources>

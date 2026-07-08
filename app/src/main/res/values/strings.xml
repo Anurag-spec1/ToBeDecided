@@ -11,7 +11,9 @@
     <string name="label_about">about</string>
     <string name="label_connect">connect</string>
     <string name="terminal_prompt">$ whoami</string>
-    <string name="bio_text">Hello, I\'m Anurag Shrivastav — an Android developer who cares about the details most people scroll past: the corner radius, the shadow falloff, the sixty milliseconds a screen takes to feel right. Over the last 1.5 years I\'ve shipped 10+ real-world apps, working mostly in Kotlin and Jetpack Compose, with a focus on clean architecture and interfaces that feel considered, not generated. Always building, always refining</string>
+    <string name="bio_text">
+    Hi, I am Anurag Shrivastav, a passionate Mobile Application Developer who enjoys building fast, reliable, and user-friendly Android applications. I have developed and shipped production apps used by hundreds of thousands of users, focusing on clean architecture, smooth user experiences, and high-quality performance. I love turning ideas into polished products and continuously exploring new technologies to create better mobile experiences.
+</string>
     <string name="tile_title_github">GitHub</string>
     <string name="tile_sub_github">/anurag-shrivastav</string>
     <string name="tile_title_linkedin">LinkedIn</string>

@@ -23,7 +23,7 @@
             <FrameLayout
                 android:id="@+id/coverFrame"
                 android:layout_width="0dp"
-                android:layout_height="200dp"
+                android:layout_height="250dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -33,6 +33,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:contentDescription="@string/cd_cover_photo"
+                    android:src="@drawable/panda_cover"
                     android:scaleType="centerCrop" />
 
                 <View
