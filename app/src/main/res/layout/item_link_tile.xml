@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/tileRoot"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_link_tile"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="14dp">
+
+    <FrameLayout
+        android:id="@+id/tileIconBg"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:background="@drawable/bg_tile_icon">
+
+        <ImageView
+            android:id="@+id/tileIcon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_github" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tileTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_medium"
+            android:text="@string/tile_title_github"
+            android:textColor="@color/text_hi"
+            android:textSize="14.5sp" />
+
+        <TextView
+            android:id="@+id/tileSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/jetbrains_mono_regular"
+            android:maxLines="1"
+            android:text="@string/tile_sub_github"
+            android:textColor="@color/text_lo"
+            android:textSize="10.8sp" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/tileGoBg"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/bg_tile_go">
+
+        <ImageView
+            android:id="@+id/tileGoIcon"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_gravity="center"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_arrow_up_right"
+            app:tint="@color/accent" />
+    </FrameLayout>
+</LinearLayout>

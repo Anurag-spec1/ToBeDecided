@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- vertical: light at top-mid, fading to solid bg-0 at the bottom edge -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="270"
+                android:startColor="#59030705"
+                android:centerColor="#40030705"
+                android:endColor="@color/bg_0" />
+        </shape>
+    </item>
+    <!-- horizontal vignette: darker at the left/right edges -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="0"
+                android:startColor="#66030705"
+                android:centerColor="@android:color/transparent"
+                android:endColor="#66030705" />
+        </shape>
+    </item>
+</layer-list>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- base vertical gradient: bg-1 -> bg-0 -> near-black -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="270"
+                android:startColor="@color/bg_1"
+                android:centerColor="@color/bg_0"
+                android:endColor="@color/bg_screen_bottom"
+                android:centerY="0.45" />
+        </shape>
+    </item>
+    <!-- soft green radial glow near the top, mimics the CSS radial-gradient -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:type="radial"
+                android:gradientRadius="280dp"
+                android:centerX="0.5"
+                android:centerY="0.02"
+                android:startColor="#1A34D67A"
+                android:endColor="@android:color/transparent" />
+        </shape>
+    </item>
+</layer-list>

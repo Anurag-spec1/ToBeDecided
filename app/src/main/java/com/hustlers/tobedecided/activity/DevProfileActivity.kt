@@ -1,290 +1,188 @@
 package com.hustlers.tobedecided.activity
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
-import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
+import android.content.ContentValues.TAG
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
 import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.style.ReplacementSpan
+import android.util.Log
 import android.view.View
-import android.view.ViewOutlineProvider
-import android.view.animation.AccelerateDecelerateInterpolator
-import android.view.animation.DecelerateInterpolator
-import android.view.animation.LinearInterpolator
-import android.view.animation.OvershootInterpolator
+import android.widget.FrameLayout
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
 import com.hustlers.tobedecided.R
 import com.hustlers.tobedecided.databinding.ActivityDevProfileBinding
-import kotlin.random.Random
 
 class DevProfileActivity : AppCompatActivity() {
 
-    private val displayName = "ARJUN MEHTA"
-    private val githubUrl = "https://github.com/arjunmehta"
-    private val linkedinUrl = "https://linkedin.com/in/arjunmehta"
-    private val instagramUrl = "https://instagram.com/arjun.codes"
-    private val emailAddress = "arjun.mehta.dev@example.com"
-
-    private val mainHandler = Handler(Looper.getMainLooper())
-    private var roleCursorOn = true
-    private var scanlineAnimator: ValueAnimator? = null
-    private var avatarScanAnimator: ObjectAnimator? = null
-    private var shimmerAnimator: ObjectAnimator? = null
-    private var statusPulseAnimator: ObjectAnimator? = null
-
     private lateinit var binding: ActivityDevProfileBinding
+    private var cursorBlinkAnimator: ValueAnimator? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDevProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.ring.startSpinning(5000L)
-
-        setupClipToOval(binding.avatarScan)
-        startAmbientLoops()
-        playBootSequence()
-        setupClickListeners()
+        loadHeaderImages()
+        setupBioWithBlinkingCursor()
+        setupLinkTiles()
     }
 
-    private fun setupClipToOval(scanView: View) {
-        val parent = scanView.parent as? View ?: return
-        parent.clipToOutline = true
-        parent.outlineProvider = object : ViewOutlineProvider() {
-            override fun getOutline(view: View, outline: android.graphics.Outline) {
-                outline.setOval(0, 0, view.width, view.height)
-            }
-        }
+    private fun loadHeaderImages() {
+        Glide.with(this)
+            .load("https://images.unsplash.com/photo-1550439062-609e1531270e?w=800&q=80")
+            .centerCrop()
+            .into(binding.coverImage)
+
+        Glide.with(this)
+            .load("https://i.pravatar.cc/200?img=13")
+            .centerCrop()
+            .into(binding.avatarImage)
     }
 
-    private fun startAmbientLoops() {
-        binding.scanlineBeam.post {
-            val screenHeight = resources.displayMetrics.heightPixels.toFloat()
-            scanlineAnimator =
-                ValueAnimator.ofFloat(-binding.scanlineBeam.height.toFloat(), screenHeight).apply {
-                    duration = 7000L
-                    repeatCount = ValueAnimator.INFINITE
-                    interpolator = LinearInterpolator()
-                    addUpdateListener {
-                        binding.scanlineBeam.translationY = it.animatedValue as Float
-                    }
-                    start()
-                }
-        }
+    private fun setupBioWithBlinkingCursor() {
+        val bioText = getString(R.string.bio_text)
+        val cursorSpan = BlinkingCursorSpan(ContextCompat.getColor(this, R.color.accent))
 
-        binding.avatarScan.post {
-            avatarScanAnimator = ObjectAnimator.ofFloat(
-                binding.avatarScan, "translationY", -30f * resources.displayMetrics.density,
-                94f * resources.displayMetrics.density
-            ).apply {
-                duration = 3200L
-                repeatCount = ValueAnimator.INFINITE
-                interpolator = AccelerateDecelerateInterpolator()
-                start()
-            }
-        }
+        val spannable = SpannableStringBuilder(bioText).append(" \u2002")
+        spannable.setSpan(
+            cursorSpan,
+            spannable.length - 1,
+            spannable.length,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        binding.bioText.text = spannable
 
-        statusPulseAnimator = ObjectAnimator.ofFloat(binding.statusDot, "alpha", 1f, 0.35f).apply {
-            duration = 1000L
+        cursorBlinkAnimator = ValueAnimator.ofInt(255, 0).apply {
+            duration = 550
             repeatMode = ValueAnimator.REVERSE
             repeatCount = ValueAnimator.INFINITE
+            addUpdateListener { animator ->
+                cursorSpan.alpha = animator.animatedValue as Int
+                binding.bioText.invalidate()
+            }
             start()
         }
     }
 
-    private fun playBootSequence() {
-        mainHandler.postDelayed(
-            { binding.bootLine1.animate().alpha(1f).setDuration(300).start() },
-            100
-        )
-        mainHandler.postDelayed(
-            { binding.bootLine2.animate().alpha(1f).setDuration(300).start() },
-            550
-        )
-        mainHandler.postDelayed(
-            { binding.bootLine3.animate().alpha(1f).setDuration(300).start() },
-            1050
+    private data class LinkTile(
+        val title: String,
+        val subtitle: String,
+        val iconRes: Int,
+        val brand: Int,
+        val brandBg: Int,
+        val url: String
+    )
+
+    private fun setupLinkTiles() {
+        val tiles = listOf(
+            binding.tileGithub.root to LinkTile(
+                title = "GitHub",
+                subtitle = "/anurag-shrivastav",
+                iconRes = R.drawable.ic_github,
+                brand = Color.parseColor("#F1F7F3"),
+                brandBg = Color.parseColor("#26F1F7F3"),
+                url = "https://github.com/"
+            ),
+            binding.tileLinkedin.root to LinkTile(
+                title = "LinkedIn",
+                subtitle = "/in/anurag-shrivastav",
+                iconRes = R.drawable.ic_linkedin,
+                brand = Color.parseColor("#3B9EFF"),
+                brandBg = Color.parseColor("#383B9EFF"),
+                url = "https://linkedin.com/"
+            ),
+            binding.tileInstagram.root to LinkTile(
+                title = "Instagram",
+                subtitle = "@anurag.shrivastav",
+                iconRes = R.drawable.ic_instagram,
+                brand = Color.parseColor("#E1306C"),
+                brandBg = Color.parseColor("#38E1306C"),
+                url = "https://instagram.com/"
+            ),
+            binding.tileGmail.root to LinkTile(
+                title = "Gmail",
+                subtitle = "anurag.shrivastav",
+                iconRes = R.drawable.ic_gmail,
+                brand = Color.parseColor("#EA4335"),
+                brandBg = Color.parseColor("#38EA4335"),
+                url = "mailto:anurag.shrivastav@gmail.com"
+            )
         )
 
-        ObjectAnimator.ofInt(binding.bootProgress, "progress", 0, 100).apply {
-            duration = 1600L
-            startDelay = 150
-            interpolator = DecelerateInterpolator()
-            start()
+        tiles.forEach { (view, data) -> bindLinkTile(view, data) }
+    }
+
+    private fun bindLinkTile(root: View, data: LinkTile) {
+        root.findViewById<TextView>(R.id.tileTitle).text = data.title
+        root.findViewById<TextView>(R.id.tileSubtitle).text = data.subtitle
+
+        root.findViewById<FrameLayout>(R.id.tileIconBg).apply {
+            background.mutate()
+            backgroundTintList = ColorStateList.valueOf(data.brandBg)
         }
 
-        mainHandler.postDelayed({
-            binding.bootOverlay.animate()
-                .alpha(0f)
-                .scaleX(1.02f).scaleY(1.02f)
-                .setDuration(500)
-                .withEndAction { binding.bootOverlay.visibility = View.GONE }
-                .start()
-
-            revealCard(binding.cardFrame)
-            startDecrypt()
-        }, 1750)
-    }
-
-    private fun revealCard(cardFrame: View) {
-        cardFrame.scaleX = 0.94f
-        cardFrame.scaleY = 0.94f
-        cardFrame.translationY = 10f * resources.displayMetrics.density
-
-        cardFrame.animate()
-            .alpha(1f)
-            .scaleX(1f).scaleY(1f)
-            .translationY(0f)
-            .setDuration(700)
-            .setInterpolator(OvershootInterpolator(0.9f))
-            .withEndAction { flashBrightness(cardFrame) }
-            .start()
-
-        fadeUp(binding.roleText, 1500)
-
-        binding.dividerLeft.playDrawIn(1400L, 1800L)
-        binding.dividerRight.playDrawIn(1400L, 1800L)
-
-        val rows = listOf(
-            binding.rowGithub to 1900L,
-            binding.rowLinkedin to 2020L,
-            binding.rowInstagram to 2140L,
-            binding.rowMail to 2260L
-        )
-        rows.forEach { (row, delay) -> slideIn(row, delay) }
-
-        fadeUp(binding.ctaWrap, 2380) { startShimmer() }
-
-        fadeUp(binding.footerRow, 2500)
-    }
-
-    private fun flashBrightness(view: View) {
-        view.animate().scaleX(1.015f).scaleY(1.015f).setDuration(120)
-            .withEndAction {
-                view.animate().scaleX(1f).scaleY(1f).setDuration(180).start()
-            }.start()
-    }
-
-    private fun fadeUp(view: View, delay: Long, onEnd: (() -> Unit)? = null) {
-        view.translationY = 6f * resources.displayMetrics.density
-        view.animate()
-            .alpha(1f)
-            .translationY(0f)
-            .setStartDelay(delay)
-            .setDuration(600)
-            .withEndAction { onEnd?.invoke() }
-            .start()
-
-        if (view.id == R.id.role_text) {
-            mainHandler.postDelayed({ startRoleCursorBlink() }, delay)
+        root.findViewById<ImageView>(R.id.tileIcon).apply {
+            setImageResource(data.iconRes)
+            imageTintList = ColorStateList.valueOf(data.brand)
         }
-    }
 
-    private fun slideIn(view: View, delay: Long) {
-        view.translationX = -16f * resources.displayMetrics.density
-        view.animate()
-            .alpha(1f)
-            .translationX(0f)
-            .setStartDelay(delay)
-            .setDuration(500)
-            .setInterpolator(DecelerateInterpolator())
-            .start()
-    }
+        root.findViewById<ImageView>(R.id.tileGoIcon).imageTintList =
+            ColorStateList.valueOf(data.brand)
 
-    private fun startRoleCursorBlink() {
-        val baseText = "FULL STACK DEVELOPER"
-        val blink = object : Runnable {
-            override fun run() {
-                binding.roleText.text = if (roleCursorOn) "$baseText _" else baseText
-                roleCursorOn = !roleCursorOn
-                mainHandler.postDelayed(this, 500)
+        root.setOnClickListener {
+            try {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(data.url)))
+            } catch (e: Exception) {
+                Log.e(TAG, "No app found to handle: ${data.url}", e)
             }
         }
-        mainHandler.post(blink)
-    }
-
-    private fun startShimmer() {
-        binding.ctaButton.post {
-            val start = -binding.ctaShimmer.width.toFloat()
-            val end = binding.ctaButton.width.toFloat()
-            shimmerAnimator =
-                ObjectAnimator.ofFloat(binding.ctaShimmer, "translationX", start, end).apply {
-                    duration = 1300L
-                    startDelay = 0
-                    repeatCount = ValueAnimator.INFINITE
-                    interpolator = AccelerateDecelerateInterpolator()
-                    addListener(object : AnimatorListenerAdapter() {
-                        override fun onAnimationRepeat(animation: Animator) {
-                            binding.ctaShimmer.translationX = start
-                        }
-                    })
-                    start()
-                }
-        }
-    }
-
-    private fun startDecrypt() {
-        val target = displayName
-        val chars = "!<>-_\\/[]{}—=+*^?#01"
-        val totalFrames = 22
-        var frame = 0
-        val resolveAt = target.mapIndexed { i, c ->
-            if (c == ' ') 0 else (Random.nextInt((totalFrames * 0.55).toInt()) + (i * 1.1).toInt())
-        }
-
-        val runnable = object : Runnable {
-            override fun run() {
-                val sb = StringBuilder()
-                for (i in target.indices) {
-                    val c = target[i]
-                    sb.append(
-                        when {
-                            c == ' ' -> ' '
-                            frame >= resolveAt[i] -> c
-                            else -> chars[Random.nextInt(chars.length)]
-                        }
-                    )
-                }
-                binding.nameText.text = sb.toString()
-                frame++
-                if (frame <= totalFrames + 6) {
-                    mainHandler.postDelayed(this, 38)
-                } else {
-                    binding.nameText.text = target
-                }
-            }
-        }
-        mainHandler.post(runnable)
-    }
-
-    private fun setupClickListeners() {
-        binding.rowGithub.setOnClickListener { openUrl(githubUrl) }
-        binding.rowLinkedin.setOnClickListener { openUrl(linkedinUrl) }
-        binding.rowInstagram.setOnClickListener { openUrl(instagramUrl) }
-        binding.rowMail.setOnClickListener { openMail() }
-        binding.ctaButton.setOnClickListener { openMail() }
-    }
-
-    private fun openUrl(url: String) {
-        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
-    }
-
-    private fun openMail() {
-        val intent = Intent(Intent.ACTION_SENDTO).apply {
-            data = Uri.parse("mailto:$emailAddress")
-        }
-        startActivity(intent)
     }
 
     override fun onDestroy() {
-        mainHandler.removeCallbacksAndMessages(null)
-        scanlineAnimator?.cancel()
-        avatarScanAnimator?.cancel()
-        shimmerAnimator?.cancel()
-        statusPulseAnimator?.cancel()
+        cursorBlinkAnimator?.cancel()
+        cursorBlinkAnimator = null
         super.onDestroy()
+    }
+
+    private class BlinkingCursorSpan(private val color: Int) : ReplacementSpan() {
+        var alpha = 255
+        private val paint = Paint()
+
+        override fun getSize(
+            paint: Paint,
+            text: CharSequence,
+            start: Int,
+            end: Int,
+            fm: Paint.FontMetricsInt?
+        ): Int = (paint.textSize * 0.55f).toInt()
+
+        override fun draw(
+            canvas: Canvas,
+            text: CharSequence,
+            start: Int,
+            end: Int,
+            x: Float,
+            top: Int,
+            y: Int,
+            bottom: Int,
+            paint: Paint
+        ) {
+            this.paint.color = color
+            this.paint.alpha = alpha
+            val w = paint.textSize * 0.42f
+            val h = paint.textSize * 0.92f
+            canvas.drawRect(x, y - h, x + w, y.toFloat(), this.paint)
+        }
     }
 }

@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">ToBeDecided</string>
+    <string name="cd_cover_photo">Cover background</string>
+    <string name="cd_profile_photo">Profile photo</string>
+    <string name="dev_name">Anurag Shrivastav</string>
+    <string name="dev_role">Android Developer</string>
+    <string name="stat_experience_value">1.5 yrs</string>
+    <string name="stat_experience_label">Experience</string>
+    <string name="stat_projects_value">10+</string>
+    <string name="stat_projects_label">Projects delivered</string>
+    <string name="label_about">about</string>
+    <string name="label_connect">connect</string>
+    <string name="terminal_prompt">$ whoami</string>
+    <string name="bio_text">Hello, I\'m Anurag Shrivastav — an Android developer who cares about the details most people scroll past: the corner radius, the shadow falloff, the sixty milliseconds a screen takes to feel right. Over the last 1.5 years I\'ve shipped 10+ real-world apps, working mostly in Kotlin and Jetpack Compose, with a focus on clean architecture and interfaces that feel considered, not generated. Always building, always refining</string>
+    <string name="tile_title_github">GitHub</string>
+    <string name="tile_sub_github">/anurag-shrivastav</string>
+    <string name="tile_title_linkedin">LinkedIn</string>
+    <string name="tile_sub_linkedin">/in/anurag-shrivastav</string>
+    <string name="tile_title_instagram">Instagram</string>
+    <string name="tile_sub_instagram">anurag.shrivastav</string>
+    <string name="tile_title_gmail">Gmail</string>
+    <string name="tile_sub_gmail">anurag.shrivastav</string>
+    <string name="url_github" translatable="false">https://github.com/</string>
+    <string name="url_linkedin" translatable="false">https://linkedin.com/</string>
+    <string name="url_instagram" translatable="false">https://instagram.com/</string>
+    <string name="email_gmail" translatable="false">anurag.shrivastav@gmail.com</string>
+    <string name="cover_image_url" translatable="false">https://images.unsplash.com/photo-1550439062-609e1531270e?w=800&amp;q=80</string>
+    <string name="avatar_image_url" translatable="false">https://i.pravatar.cc/200?img=13</string>
 </resources>

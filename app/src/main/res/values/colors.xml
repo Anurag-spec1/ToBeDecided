@@ -2,4 +2,39 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="bg_0">#050B08</color>
+    <color name="bg_1">#081310</color>
+    <color name="bg_screen_bottom">#030503</color>
+    <color name="surface">#0F1A15</color>
+    <color name="surface_2">#141F19</color>
+    <color name="border">#14A6FFC8</color>
+    <!--  rgba(150,255,200,0.08)  -->
+    <color name="border_strong">#29A6FFC8</color>
+    <!--  rgba(150,255,200,0.16)  -->
+    <color name="accent">#34D67A</color>
+    <color name="accent_dim">#1E8F52</color>
+    <color name="accent_glow">#4034D67A</color>
+    <!--  rgba(52,214,122,0.25)  -->
+    <color name="accent_soft_fill">#1434D67A</color>
+    <!--  rgba(52,214,122,0.08)  -->
+    <color name="accent_stat_icon_bg">#1A34D67A</color>
+    <!--  rgba(52,214,122,0.1)  -->
+    <color name="text_hi">#F1F7F3</color>
+    <color name="text_mid">#A9BDB1</color>
+    <color name="text_lo">#647169</color>
+    <!--  Brand colors for link tiles  -->
+    <color name="brand_gh">#F1F7F3</color>
+    <color name="brand_gh_bg">#24F1F7F3</color>
+    <color name="brand_li">#3B9EFF</color>
+    <color name="brand_li_bg">#383B9EFF</color>
+    <color name="brand_ig">#E1306C</color>
+    <color name="brand_ig_bg">#38E1306C</color>
+    <color name="brand_gm">#EA4335</color>
+    <color name="brand_gm_bg">#38EA4335</color>
+    <!--  macOS-style terminal dots  -->
+    <color name="dot_red">#FF5F57</color>
+    <color name="dot_yellow">#FEBC2E</color>
+    <color name="dot_green">#28C840</color>
+    <color name="overlay_scrim">#59030705</color>
+    <color name="cover_overlay_top">#33030705</color>
 </resources>
