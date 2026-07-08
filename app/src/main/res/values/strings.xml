@@ -28,4 +28,6 @@
     <string name="email_gmail" translatable="false">anurag.shrivastav@gmail.com</string>
     <string name="cover_image_url" translatable="false">https://images.unsplash.com/photo-1550439062-609e1531270e?w=800&amp;q=80</string>
     <string name="avatar_image_url" translatable="false">https://i.pravatar.cc/200?img=13</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

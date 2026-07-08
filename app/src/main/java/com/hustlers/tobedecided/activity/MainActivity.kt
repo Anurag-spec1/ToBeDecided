@@ -4,9 +4,13 @@ import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.*
+import androidx.fragment.app.Fragment
 import androidx.compose.ui.platform.ComposeView
 import com.hustlers.tobedecided.R
 import com.hustlers.tobedecided.databinding.ActivityMainBinding
+import com.hustlers.tobedecided.fragment.AppScreen
+import com.hustlers.tobedecided.fragment.HomeScreen
+import com.hustlers.tobedecided.fragment.ProfileScreen
 import com.hustlers.tobedecided.ui.NavItem
 import com.hustlers.tobedecided.ui.components.GlassmorphicBottomBar
 
@@ -19,6 +23,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        if (savedInstanceState == null) {
+            loadFragment(HomeScreen())
+        }
 
         val navItems = listOf(
             NavItem.Apps,
@@ -33,12 +41,24 @@ class MainActivity : AppCompatActivity() {
                 onItemClick = { item ->
                     currentRoute = item.route
                     when (item) {
-                        is NavItem.Home -> { /* Navigate to home */ }
-                        is NavItem.Apps -> { /* Navigate to team */ }
-                        is NavItem.Profile -> { /* Navigate to profile */ }
+                        is NavItem.Home -> {
+                            loadFragment(HomeScreen())
+                        }
+                        is NavItem.Apps -> {
+                            loadFragment(AppScreen())
+                        }
+                        is NavItem.Profile -> {
+                            loadFragment(ProfileScreen())
+                        }
                     }
                 }
             )
         }
+    }
+
+    private fun loadFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, fragment)
+            .commit()
     }
 }
