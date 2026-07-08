@@ -1,5 +1,9 @@
 package com.hustlers.tobedecided.activity
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.content.Intent
 import android.content.res.ColorStateList
@@ -13,6 +17,10 @@ import android.text.SpannableStringBuilder
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
+import android.view.animation.AccelerateInterpolator
+import android.view.animation.AnticipateInterpolator
+import android.view.animation.DecelerateInterpolator
+import android.view.animation.OvershootInterpolator
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
@@ -23,6 +31,7 @@ import com.hustlers.tobedecided.R
 import com.hustlers.tobedecided.databinding.ActivityDevProfileBinding
 import com.hustlers.tobedecided.dataclass.LinkTile
 import com.hustlers.tobedecided.ui.components.BlinkingCursorSpan
+import kotlin.random.Random
 
 class DevProfileActivity : AppCompatActivity() {
 
@@ -30,6 +39,9 @@ class DevProfileActivity : AppCompatActivity() {
     private var cursorBlinkAnimator: ValueAnimator? = null
     private var mediaPlayer: MediaPlayer? = null
     private var isMusicPrepared = false
+    private val allTileViews = mutableListOf<View>()
+    private var viewsToRestore: List<View>? = null
+    private var shouldRestoreOnResume = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,13 +50,10 @@ class DevProfileActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setMaxBrightness()
-
         setupFullScreenMode()
-
         loadHeaderImages()
         setupBioWithBlinkingCursor()
         setupLinkTiles()
-
         playBackgroundMusic()
     }
 
@@ -113,6 +122,133 @@ class DevProfileActivity : AppCompatActivity() {
         }
     }
 
+    private fun thunderstormDisappear(clickedTile: View, url: String) {
+        val otherTiles = allTileViews.filter { it != clickedTile }
+
+        val viewsToRemove = mutableListOf<View>().apply {
+            add(binding.coverFrame)
+            add(binding.avatarRing)
+            add(binding.nameText)
+            add(binding.roleText)
+            add(binding.statsRow)
+            add(binding.aboutLabel)
+            add(binding.terminalCard)
+            add(binding.connectLabel)
+            addAll(otherTiles)
+        }
+
+        viewsToRestore = viewsToRemove.toList()
+
+        val animatorSet = AnimatorSet()
+        val animations = mutableListOf<Animator>()
+
+        viewsToRemove.forEach { view ->
+            val randomX = Random.nextFloat() * 1000 - 500
+            val randomY = Random.nextFloat() * 1200 - 600
+
+            val flyAwayX = ObjectAnimator.ofFloat(view, "translationX", 0f, randomX).apply {
+                duration = 700
+                interpolator = AccelerateInterpolator(2.5f)
+            }
+
+            val flyAwayY = ObjectAnimator.ofFloat(view, "translationY", 0f, randomY).apply {
+                duration = 700
+                interpolator = AccelerateInterpolator(2.5f)
+            }
+
+            val rotation = ObjectAnimator.ofFloat(view, "rotation", 0f, Random.nextFloat() * 1440 - 720).apply {
+                duration = 700
+                interpolator = AccelerateInterpolator(2.5f)
+            }
+
+            val scaleX = ObjectAnimator.ofFloat(view, "scaleX", 1f, 0f).apply {
+                duration = 600
+                startDelay = 50
+                interpolator = AnticipateInterpolator(2f)
+            }
+
+            val scaleY = ObjectAnimator.ofFloat(view, "scaleY", 1f, 0f).apply {
+                duration = 600
+                startDelay = 50
+                interpolator = AnticipateInterpolator(2f)
+            }
+
+            val alpha = ObjectAnimator.ofFloat(view, "alpha", 1f, 0f).apply {
+                duration = 500
+                startDelay = 100
+                interpolator = AccelerateInterpolator(3f)
+            }
+
+            val disappearAnimation = AnimatorSet()
+            disappearAnimation.playTogether(flyAwayX, flyAwayY, rotation, scaleX, scaleY, alpha)
+            animations.add(disappearAnimation)
+        }
+
+        val clickedScaleX = ObjectAnimator.ofFloat(clickedTile, "scaleX", 1f, 1.25f, 1f).apply {
+            duration = 900
+            interpolator = OvershootInterpolator(3f)
+        }
+
+        val clickedScaleY = ObjectAnimator.ofFloat(clickedTile, "scaleY", 1f, 1.25f, 1f).apply {
+            duration = 900
+            interpolator = OvershootInterpolator(3f)
+        }
+
+        val clickedGlow = ObjectAnimator.ofFloat(clickedTile, "alpha", 1f, 0.6f, 1f).apply {
+            duration = 500
+            repeatCount = 2
+            repeatMode = ValueAnimator.REVERSE
+        }
+
+        animations.add(AnimatorSet().apply {
+            playTogether(clickedScaleX, clickedScaleY, clickedGlow)
+        })
+
+        animatorSet.playTogether(animations)
+        animatorSet.addListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator) {
+                viewsToRemove.forEach { it.visibility = View.INVISIBLE }
+                shouldRestoreOnResume = true
+
+                try {
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+                } catch (e: Exception) {
+                    Log.e("DevProfileActivity", "No app found to handle: $url", e)
+                    restoreViewsNow()
+                }
+            }
+        })
+
+        animatorSet.start()
+    }
+
+    private fun restoreViewsNow() {
+        viewsToRestore?.let { views ->
+            views.forEachIndexed { index, view ->
+                view.apply {
+                    visibility = View.VISIBLE
+                    alpha = 0f
+                    scaleX = 0.2f
+                    scaleY = 0.2f
+                    translationX = 0f
+                    translationY = 0f
+                    rotation = 0f
+
+                    animate()
+                        .alpha(1f)
+                        .scaleX(1f)
+                        .scaleY(1f)
+                        .setDuration(600)
+                        .setInterpolator(DecelerateInterpolator(2f))
+                        .setStartDelay(index * 40L)
+                        .start()
+                }
+            }
+            viewsToRestore = null
+            shouldRestoreOnResume = false
+        }
+    }
+
     private fun playBackgroundMusic() {
         try {
             if (mediaPlayer == null) {
@@ -176,10 +312,7 @@ class DevProfileActivity : AppCompatActivity() {
             if (vibrator.hasVibrator()) {
                 val pattern = longArrayOf(0, 500, 500)
                 vibrator.vibrate(
-                    android.os.VibrationEffect.createWaveform(
-                        pattern,
-                        0
-                    )
+                    android.os.VibrationEffect.createWaveform(pattern, 0)
                 )
             }
         } catch (e: Exception) {
@@ -230,6 +363,9 @@ class DevProfileActivity : AppCompatActivity() {
         setupFullScreenMode()
         if (isMusicPrepared && mediaPlayer?.isPlaying == false) {
             mediaPlayer?.start()
+        }
+        if (shouldRestoreOnResume) {
+            restoreViewsNow()
         }
     }
 
@@ -302,6 +438,7 @@ class DevProfileActivity : AppCompatActivity() {
         )
 
         tiles.forEachIndexed { index, (rootView, data) ->
+            allTileViews.add(rootView)
             bindLinkTile(rootView, data, index)
         }
     }
@@ -337,11 +474,7 @@ class DevProfileActivity : AppCompatActivity() {
         )
 
         root.setOnClickListener {
-            try {
-                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(data.url)))
-            } catch (e: Exception) {
-                Log.e("DevProfileActivity", "No app found to handle: ${data.url}", e)
-            }
+            thunderstormDisappear(root, data.url)
         }
     }
 
