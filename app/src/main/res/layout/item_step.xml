@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<carbon.widget.LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="12dp"
+    android:background="#001111"
+    android:orientation="vertical"
+    android:padding="18dp"
+    app:carbon_cornerRadius="15dp"
+    app:carbon_stroke="#2ED86F"
+    app:carbon_strokeWidth="1dp">
+
+    <carbon.widget.TextView
+        android:id="@+id/stepTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:carbon_font="@font/plus_jakarta" />
+
+    <carbon.widget.TextView
+        android:id="@+id/stepDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:lineSpacingExtra="3dp"
+        android:textColor="#C6C9C7"
+        android:textSize="15sp" />
+
+    <carbon.widget.LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <carbon.widget.TextView
+            android:id="@+id/stepStatus"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <carbon.widget.TextView
+            android:id="@+id/stepSecondary"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:paddingHorizontal="14dp"
+            android:textColor="#36DA77"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <carbon.widget.TextView
+            android:id="@+id/stepAction"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:background="@drawable/bg_button_gradient"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:paddingHorizontal="22dp"
+            android:textColor="#09110d"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:carbon_cornerRadius="5dp" />
+
+    </carbon.widget.LinearLayout>
+
+</carbon.widget.LinearLayout>

@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<carbon.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_activity_bg"
+    android:fitsSystemWindows="true">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottomBar"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <carbon.widget.LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="30dp"
+            android:paddingBottom="20dp">
+
+            <carbon.widget.TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
+                android:text="Share your"
+                android:textColor="@color/white"
+                android:textSize="34sp"
+                android:textStyle="bold"
+                app:carbon_font="@font/plus_jakarta" />
+
+            <carbon.widget.TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-5dp"
+                android:text="location?"
+                android:textColor="#36DA77"
+                android:textSize="34sp"
+                android:textStyle="italic|bold"
+                app:carbon_font="@font/plus_jakarta" />
+
+            <carbon.widget.LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="#001111"
+                android:orientation="vertical"
+                android:padding="18dp"
+                app:carbon_cornerRadius="15dp"
+                app:carbon_stroke="#2ED86F"
+                app:carbon_strokeWidth="1dp">
+
+                <carbon.widget.TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Your location will be visible to"
+                    android:textColor="#C6C9C7"
+                    android:textSize="14sp" />
+
+                <carbon.widget.TextView
+                    android:id="@+id/visibleTo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </carbon.widget.LinearLayout>
+
+            <carbon.widget.TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="How exact should it be?"
+                android:textColor="#F2F2F2"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <carbon.widget.LinearLayout
+                android:id="@+id/optionPrecise"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="#001111"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                app:carbon_cornerRadius="15dp"
+                app:carbon_stroke="#2ED86F"
+                app:carbon_strokeWidth="1dp">
+
+                <carbon.widget.TextView
+                    android:id="@+id/preciseCheck"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#36DA77"
+                    android:textSize="22sp" />
+
+                <carbon.widget.LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <carbon.widget.TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Precise"
+                        android:textColor="@color/white"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                    <carbon.widget.TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Exact spot on the map. Best for safety."
+                        android:textColor="#C6C9C7"
+                        android:textSize="14sp" />
+
+                </carbon.widget.LinearLayout>
+            </carbon.widget.LinearLayout>
+
+            <carbon.widget.LinearLayout
+                android:id="@+id/optionApproximate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="#001111"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                app:carbon_cornerRadius="15dp"
+                app:carbon_stroke="#2ED86F"
+                app:carbon_strokeWidth="1dp">
+
+                <carbon.widget.TextView
+                    android:id="@+id/approximateCheck"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#36DA77"
+                    android:textSize="22sp" />
+
+                <carbon.widget.LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <carbon.widget.TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Approximate"
+                        android:textColor="@color/white"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                    <carbon.widget.TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Only your rough area, about 1 to 2 km."
+                        android:textColor="#C6C9C7"
+                        android:textSize="14sp" />
+
+                </carbon.widget.LinearLayout>
+            </carbon.widget.LinearLayout>
+
+            <carbon.widget.TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:lineSpacingExtra="6dp"
+                android:text="• You can pause sharing anytime\n• A notification always shows while sharing is on\n• SOS works even if sharing is off"
+                android:textColor="#C6C9C7"
+                android:textSize="15sp" />
+
+            <carbon.widget.TextView
+                android:id="@+id/errorText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textColor="#FF6B6B"
+                android:textSize="15sp"
+                android:visibility="gone" />
+
+        </carbon.widget.LinearLayout>
+    </ScrollView>
+
+    <carbon.widget.LinearLayout
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:paddingHorizontal="30dp"
+        android:paddingBottom="16dp">
+
+        <carbon.widget.TextView
+            android:id="@+id/startSharing"
+            android:layout_width="match_parent"
+            android:layout_height="57dp"
+            android:background="@drawable/bg_button_gradient"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="Start sharing"
+            android:textColor="#09110d"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:carbon_cornerRadius="5dp"
+            app:carbon_elevation="5dp" />
+
+        <carbon.widget.TextView
+            android:id="@+id/notNow"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="6dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="Not now"
+            android:textColor="#B9B9B9"
+            android:textSize="17sp" />
+
+    </carbon.widget.LinearLayout>
+
+</carbon.widget.RelativeLayout>

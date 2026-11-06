@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<carbon.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_activity_bg"
+    android:fitsSystemWindows="true">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/continueButton"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <carbon.widget.LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="30dp"
+            android:paddingBottom="20dp">
+
+            <carbon.widget.TextView
+                android:id="@+id/titleTop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
+                android:textColor="@color/white"
+                android:textSize="34sp"
+                android:textStyle="bold"
+                app:carbon_font="@font/plus_jakarta" />
+
+            <carbon.widget.TextView
+                android:id="@+id/titleBottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-5dp"
+                android:textColor="#36DA77"
+                android:textSize="34sp"
+                android:textStyle="italic|bold"
+                app:carbon_font="@font/plus_jakarta" />
+
+            <carbon.widget.TextView
+                android:id="@+id/subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:lineSpacingExtra="3dp"
+                android:textColor="#C6C9C7"
+                android:textSize="16sp" />
+
+            <carbon.widget.LinearLayout
+                android:id="@+id/stepContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical" />
+
+        </carbon.widget.LinearLayout>
+    </ScrollView>
+
+    <carbon.widget.TextView
+        android:id="@+id/continueButton"
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginVertical="20dp"
+        android:background="@drawable/bg_button_gradient"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:text="Continue"
+        android:textColor="#09110d"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:carbon_cornerRadius="5dp"
+        app:carbon_elevation="5dp" />
+
+</carbon.widget.RelativeLayout>
