@@ -66,4 +66,9 @@ dependencies {
 
     implementation("de.hdodenhof:circleimageview:3.1.0")
     implementation("com.github.bumptech.glide:glide:5.0.5")
+
+    implementation(platform("io.github.jan-tennert.supabase:bom:3.0.3"))
+    implementation("io.github.jan-tennert.supabase:auth-kt")
+    implementation("io.ktor:ktor-client-android:3.0.3")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
 }

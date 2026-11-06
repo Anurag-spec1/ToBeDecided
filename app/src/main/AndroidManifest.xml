@@ -19,16 +19,6 @@
             android:name=".activity.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.SignupActivity"
-            android:configChanges="orientation|screenSize"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.VerifyOtp"
-            android:configChanges="orientation|screenSize"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".activity.MainActivity"
             android:configChanges="orientation|screenSize"
             android:exported="true"
