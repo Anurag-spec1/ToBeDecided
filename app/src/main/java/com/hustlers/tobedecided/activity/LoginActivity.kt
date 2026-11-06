@@ -22,7 +22,8 @@ import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
-class LoginActivity : AppCompatActivity() {
+class
+LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     private var passwordVisible = false
@@ -128,7 +129,7 @@ class LoginActivity : AppCompatActivity() {
     private fun messageFor(e: RestException): String {
         val text = "${e.error} ${e.description.orEmpty()}".lowercase()
         return when {
-            "invalid" in text -> "Incorrect email or password"
+            "invalid" in text -> "Incorrect credentials"
             "not confirmed" in text || "email_not_confirmed" in text ->
                 "This account is not confirmed yet. Ask your admin."
             "rate" in text || "too many" in text ->

@@ -154,7 +154,7 @@
                     android:focusable="true"
                     android:gravity="center"
                     android:paddingHorizontal="20dp"
-                    android:text="Show"
+                    android:text="Hide"
                     android:textColor="#36DA77"
                     android:textSize="15sp"
                     android:textStyle="bold" />
