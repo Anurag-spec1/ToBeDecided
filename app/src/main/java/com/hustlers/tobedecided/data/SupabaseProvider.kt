@@ -1,13 +1,14 @@
 package com.hustlers.tobedecided.data
 
+import com.hustlers.tobedecided.config.ApiConfig
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.auth.Auth
 import io.github.jan.supabase.createSupabaseClient
 
 object SupabaseProvider {
 
-    private const val SUPABASE_URL = "https://YOUR_PROJECT_REF.supabase.co"
-    private const val SUPABASE_KEY = "YOUR_ANON_OR_PUBLISHABLE_KEY"
+    private const val SUPABASE_URL = ApiConfig.SUPABASE_URL
+    private const val SUPABASE_KEY = ApiConfig.SUPABASE_KEY
 
     val client: SupabaseClient by lazy {
         createSupabaseClient(

@@ -13,7 +13,7 @@
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/sendOtp"
+        android:layout_above="@id/signIn"
         android:fillViewport="true"
         android:scrollbars="none">
 
@@ -27,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
-                android:layout_marginTop="240dp"
+                android:layout_marginTop="200dp"
                 android:layout_marginEnd="30dp"
                 android:ellipsize="end"
                 android:maxLines="1"
@@ -59,124 +59,134 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="30dp"
-                android:maxLines="2"
-                android:text="Enter your mobile number and we'll send you a one-time code to verify it's you."
+                android:maxLines="3"
+                android:text="Sign in with the email and password your family admin gave you."
                 android:textColor="#C6C9C7"
                 android:textSize="17sp" />
 
             <carbon.widget.TextView
-                android:id="@+id/constText4"
+                android:id="@+id/emailLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="30dp"
-                android:text="Mobile number"
+                android:text="Email"
                 android:textColor="#F2F2F2"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
             <carbon.widget.LinearLayout
-                android:id="@+id/linearLayout1"
+                android:id="@+id/emailBox"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginHorizontal="30dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="30dp"
                 android:background="#001111"
                 android:orientation="horizontal"
                 app:carbon_cornerRadius="15dp"
                 app:carbon_stroke="#2ED86F"
                 app:carbon_strokeWidth="1dp">
 
-                <carbon.widget.ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="28dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="15dp"
-                    android:contentDescription="India flag"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ind" />
-
-                <carbon.widget.TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="13dp"
-                    android:text="+91"
-                    android:textColor="@color/white"
-                    android:textSize="20sp" />
-
-                <carbon.widget.TextView
-                    android:layout_width="3dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="20dp"
-                    android:background="#4B5A54" />
-
                 <carbon.widget.EditText
-                    android:id="@+id/etPhone"
+                    android:id="@+id/etEmail"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical"
                     android:layout_weight="1"
+                    android:autofillHints="emailAddress"
                     android:background="#001111"
-                    android:hint="87XXXXXX61"
-                    android:imeOptions="actionDone"
-                    android:inputType="phone"
-                    android:maxLength="10"
+                    android:hint="Enter your email"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
                     android:paddingHorizontal="20dp"
                     android:singleLine="true"
                     android:textColor="@color/white"
                     android:textColorHint="@color/carbon_white_50"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
 
             </carbon.widget.LinearLayout>
+
+            <carbon.widget.TextView
+                android:id="@+id/passwordLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="30dp"
+                android:text="Password"
+                android:textColor="#F2F2F2"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <carbon.widget.LinearLayout
+                android:id="@+id/passwordBox"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="10dp"
+                android:background="#001111"
+                android:orientation="horizontal"
+                app:carbon_cornerRadius="15dp"
+                app:carbon_stroke="#2ED86F"
+                app:carbon_strokeWidth="1dp">
+
+                <carbon.widget.EditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:autofillHints="password"
+                    android:background="#001111"
+                    android:hint="Your password"
+                    android:imeOptions="actionDone"
+                    android:inputType="textPassword"
+                    android:paddingHorizontal="20dp"
+                    android:singleLine="true"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/carbon_white_50"
+                    android:textSize="18sp" />
+
+                <carbon.widget.TextView
+                    android:id="@+id/togglePassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:paddingHorizontal="20dp"
+                    android:text="Show"
+                    android:textColor="#36DA77"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+            </carbon.widget.LinearLayout>
+
+            <carbon.widget.TextView
+                android:id="@+id/errorText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="30dp"
+                android:textColor="#FF6B6B"
+                android:textSize="15sp"
+                android:visibility="gone" />
 
         </carbon.widget.LinearLayout>
     </ScrollView>
 
-    <carbon.widget.LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:orientation="horizontal">
-
-        <carbon.widget.TextView
-            android:id="@+id/constText5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Don't have an account?  "
-            android:textColor="#B9B9B9"
-            android:textSize="17sp" />
-
-        <carbon.widget.TextView
-            android:id="@+id/signupText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:focusable="true"
-            android:text="Sign up"
-            android:textColor="#35DA76"
-            android:textSize="17sp" />
-
-    </carbon.widget.LinearLayout>
-
     <carbon.widget.TextView
-        android:id="@+id/sendOtp"
+        android:id="@+id/signIn"
         android:layout_width="match_parent"
         android:layout_height="57dp"
-        android:layout_above="@id/linearLayout2"
+        android:layout_alignParentBottom="true"
         android:layout_marginHorizontal="30dp"
-        android:layout_marginVertical="20dp"
+        android:layout_marginVertical="40dp"
         android:background="@drawable/bg_button_gradient"
         android:clickable="true"
         android:focusable="true"
         android:gravity="center"
-        android:text="Send OTP"
+        android:text="Sign in"
         android:textColor="#09110d"
         android:textSize="18sp"
         android:textStyle="bold"
