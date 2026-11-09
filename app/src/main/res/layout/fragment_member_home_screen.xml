@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<carbon.widget.LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:paddingHorizontal="30dp">
+
+    <carbon.widget.TextView
+        android:id="@+id/greeting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:carbon_font="@font/plus_jakarta" />
+
+    <carbon.widget.TextView
+        android:id="@+id/statusText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:lineSpacingExtra="3dp"
+        android:textColor="#C6C9C7"
+        android:textSize="17sp" />
+
+    <carbon.widget.TextView
+        android:id="@+id/startSharing"
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/bg_button_gradient"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:text="Start sharing"
+        android:textColor="#09110d"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:carbon_cornerRadius="5dp" />
+
+</carbon.widget.LinearLayout>

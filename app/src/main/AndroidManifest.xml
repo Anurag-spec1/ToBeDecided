@@ -27,7 +27,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ToBeDecided">
         <activity
-            android:name=".activity.MemberHome"
+            android:name=".activity.DeviceSetupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.PermissionsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.MemberHomeActivity"
             android:exported="false" />
         <activity
             android:name=".activity.ConsentActivity"

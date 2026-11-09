@@ -1,6 +1,5 @@
 package com.hustlers.tobedecided.activity
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
@@ -11,6 +10,9 @@ import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.lifecycleScope
+import com.hustlers.tobedecided.data.AppPrefs
+import com.hustlers.tobedecided.data.Route
+import com.hustlers.tobedecided.data.SessionRouter
 import com.hustlers.tobedecided.data.SupabaseProvider
 import com.hustlers.tobedecided.databinding.ActivityLoginBinding
 import io.github.jan.supabase.auth.auth
@@ -22,17 +24,19 @@ import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
-class
-LoginActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var prefs: AppPrefs
     private var passwordVisible = false
     private var loading = false
+    private var formReady = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        prefs = AppPrefs(this)
         binding.root.visibility = View.INVISIBLE
 
         lifecycleScope.launch {
@@ -40,11 +44,50 @@ LoginActivity : AppCompatActivity() {
                 .first { it !is SessionStatus.Initializing }
 
             if (status is SessionStatus.Authenticated || status is SessionStatus.RefreshFailure) {
-                openMain()
+                routeAfterAuth()
             } else {
-                binding.root.visibility = View.VISIBLE
-                setupForm()
+                showForm()
             }
+        }
+    }
+
+    private suspend fun routeAfterAuth() {
+        when (val route = SessionRouter.resolve(this)) {
+            is Route.Go -> SessionRouter.open(this, route.target)
+            Route.NoProfile -> {
+                signOutQuietly()
+                prefs.clear()
+                showForm()
+                setLoading(false)
+                showError("Your account is not set up yet. Ask your admin.")
+            }
+            Route.NeedsInternet -> {
+                showForm()
+                setLoading(false)
+                showError("Connect to the internet once to finish signing in.")
+            }
+            is Route.Error -> {
+                showForm()
+                setLoading(false)
+                showError("Could not load your profile: ${route.message}")
+            }
+        }
+    }
+
+    private suspend fun signOutQuietly() {
+        try {
+            SupabaseProvider.client.auth.signOut()
+        } catch (e: CancellationException) {
+            throw e
+        } catch (e: Exception) {
+        }
+    }
+
+    private fun showForm() {
+        binding.root.visibility = View.VISIBLE
+        if (!formReady) {
+            formReady = true
+            setupForm()
         }
     }
 
@@ -105,31 +148,36 @@ LoginActivity : AppCompatActivity() {
         setLoading(true)
 
         lifecycleScope.launch {
-            try {
+            val signedIn = try {
                 SupabaseProvider.client.auth.signInWith(Email) {
                     this.email = email
                     this.password = password
                 }
-                openMain()
+                true
             } catch (e: CancellationException) {
                 throw e
             } catch (e: RestException) {
                 setLoading(false)
                 showError(messageFor(e))
+                false
             } catch (e: HttpRequestException) {
                 setLoading(false)
                 showError("No internet connection. Check your network and try again.")
+                false
             } catch (e: Exception) {
                 setLoading(false)
                 showError("Something went wrong. Please try again.")
+                false
             }
+
+            if (signedIn) routeAfterAuth()
         }
     }
 
     private fun messageFor(e: RestException): String {
         val text = "${e.error} ${e.description.orEmpty()}".lowercase()
         return when {
-            "invalid" in text -> "Incorrect credentials"
+            "invalid" in text -> "Incorrect email or password"
             "not confirmed" in text || "email_not_confirmed" in text ->
                 "This account is not confirmed yet. Ask your admin."
             "rate" in text || "too many" in text ->
@@ -163,12 +211,4 @@ LoginActivity : AppCompatActivity() {
     private fun password() = binding.etPassword.text.toString()
 
     private fun isEmailValid(value: String) = Patterns.EMAIL_ADDRESS.matcher(value).matches()
-
-    private fun openMain() {
-        startActivity(
-            Intent(this, MainActivity::class.java)
-                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-        )
-        finish()
-    }
 }

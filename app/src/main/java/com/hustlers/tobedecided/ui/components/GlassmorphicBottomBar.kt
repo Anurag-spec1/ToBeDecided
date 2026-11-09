@@ -1,17 +1,35 @@
 package com.hustlers.tobedecided.ui.components
 
-import androidx.compose.animation.*
-import androidx.compose.animation.core.*
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.EaseInOutCubic
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -23,10 +41,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.hustlers.tobedecided.ui.NavItem
 
 @Composable
@@ -190,96 +205,54 @@ fun GlassmorphicBottomBar(
 
                 Box(
                     modifier = Modifier
-                        .fillMaxHeight()
-                        .padding(vertical = 6.dp)
+                        .size(52.dp)
                         .graphicsLayer {
                             rotationZ = ziggleRotation
                             scaleX = bounceScale
                             scaleY = bounceScale
                         }
-                        .clip(RoundedCornerShape(28.dp))
+                        .clip(RoundedCornerShape(26.dp))
                         .selectable(
                             selected = isSelected,
                             onClick = { onItemClick(item) },
                             interactionSource = remember { MutableInteractionSource() },
                             indication = null
                         )
-                        .background(itemBackground)
-                        .wrapContentWidth(),
+                        .background(itemBackground),
                     contentAlignment = Alignment.Center
                 ) {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.Center,
-                        modifier = Modifier
-                            .padding(horizontal = 14.dp)
-                            .wrapContentWidth()
-                    ) {
+                    if (isSelected) {
                         Box(
-                            contentAlignment = Alignment.Center,
-                            modifier = Modifier.size(24.dp)
-                        ) {
-                            if (isSelected) {
-                                Box(
-                                    modifier = Modifier
-                                        .size(30.dp)
-                                        .alpha(0.3f)
-                                        .clip(RoundedCornerShape(15.dp))
-                                        .background(
-                                            Brush.radialGradient(
-                                                colors = listOf(
-                                                    Color(0xFF2ED86F),
-                                                    Color.Transparent
-                                                )
-                                            )
+                            modifier = Modifier
+                                .size(34.dp)
+                                .alpha(0.3f)
+                                .clip(RoundedCornerShape(17.dp))
+                                .background(
+                                    Brush.radialGradient(
+                                        colors = listOf(
+                                            Color(0xFF2ED86F),
+                                            Color.Transparent
                                         )
-                                )
-                            }
-
-                            if (item.iconVector != null) {
-                                Icon(
-                                    imageVector = item.iconVector,
-                                    contentDescription = item.title,
-                                    tint = if (isSelected) Color(0xFF2ED86F) else Color.White.copy(alpha = 0.6f),
-                                    modifier = Modifier.size(22.dp)
-                                )
-                            } else if (item.iconRes != null) {
-                                Image(
-                                    painter = painterResource(id = item.iconRes),
-                                    contentDescription = item.title,
-                                    modifier = Modifier
-                                        .size(22.dp)
-                                        .alpha(if (isSelected) 1f else 0.6f)
-                                )
-                            }
-                        }
-
-                        AnimatedVisibility(
-                            visible = isSelected,
-                            enter = fadeIn(animationSpec = tween(200, delayMillis = 50)) +
-                                    expandHorizontally(
-                                        animationSpec = tween(300, easing = FastOutSlowInEasing),
-                                        expandFrom = Alignment.Start
-                                    ),
-                            exit = fadeOut(animationSpec = tween(150)) +
-                                    shrinkHorizontally(
-                                        animationSpec = tween(200),
-                                        shrinkTowards = Alignment.Start
                                     )
-                        ) {
-                            Text(
-                                text = item.title,
-                                color = Color.White,
-                                fontWeight = FontWeight.Bold,
-                                fontSize = 13.sp,
-                                maxLines = 1,
-                                overflow = TextOverflow.Visible,
-                                softWrap = false,
-                                modifier = Modifier
-                                    .padding(start = 8.dp)
-                                    .wrapContentWidth()
-                            )
-                        }
+                                )
+                        )
+                    }
+
+                    if (item.iconVector != null) {
+                        Icon(
+                            imageVector = item.iconVector,
+                            contentDescription = item.title,
+                            tint = if (isSelected) Color(0xFF2ED86F) else Color.White.copy(alpha = 0.6f),
+                            modifier = Modifier.size(26.dp)
+                        )
+                    } else if (item.iconRes != null) {
+                        Image(
+                            painter = painterResource(id = item.iconRes),
+                            contentDescription = item.title,
+                            modifier = Modifier
+                                .size(26.dp)
+                                .alpha(if (isSelected) 1f else 0.6f)
+                        )
                     }
                 }
 
