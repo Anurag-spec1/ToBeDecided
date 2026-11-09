@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<carbon.widget.LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingHorizontal="30dp">
+
+    <carbon.widget.TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="Settings"
+        android:textColor="@color/white"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:carbon_font="@font/plus_jakarta" />
+
+    <carbon.widget.LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="#001111"
+        android:orientation="vertical"
+        android:padding="18dp"
+        app:carbon_cornerRadius="15dp"
+        app:carbon_stroke="#2ED86F"
+        app:carbon_strokeWidth="1dp">
+
+        <carbon.widget.TextView
+            android:id="@+id/nameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <carbon.widget.TextView
+            android:id="@+id/roleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="#36DA77"
+            android:textSize="15sp" />
+
+    </carbon.widget.LinearLayout>
+
+    <carbon.widget.TextView
+        android:id="@+id/signOut"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginTop="24dp"
+        android:background="#001111"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:text="Sign out"
+        android:textColor="#FF6B6B"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:carbon_cornerRadius="15dp"
+        app:carbon_stroke="#FF6B6B"
+        app:carbon_strokeWidth="1dp" />
+
+</carbon.widget.LinearLayout>

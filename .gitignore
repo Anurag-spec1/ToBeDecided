@@ -14,8 +14,6 @@ out/
 local.properties
 
 # API keys and secrets
-.env
-.env.*
 !.env.example
 secrets.properties
 apikeys.properties
@@ -56,3 +54,5 @@ desktop.ini
 
 # Crash reports
 crashlytics-build.properties
+config.bat
+node_modules

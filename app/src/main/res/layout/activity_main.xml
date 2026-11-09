@@ -23,6 +23,6 @@
         android:layout_height="68dp"
         android:layout_alignParentBottom="true"
         android:layout_marginHorizontal="30dp"
-        android:layout_marginBottom="32dp" />
+        android:layout_marginBottom="21dp" />
 
 </carbon.widget.RelativeLayout>

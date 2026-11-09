@@ -4,6 +4,7 @@ import com.hustlers.tobedecided.config.ApiConfig
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.auth.Auth
 import io.github.jan.supabase.createSupabaseClient
+import io.github.jan.supabase.postgrest.Postgrest
 
 object SupabaseProvider {
 
@@ -16,6 +17,7 @@ object SupabaseProvider {
             supabaseKey = SUPABASE_KEY
         ) {
             install(Auth)
+            install(Postgrest)
         }
     }
 }

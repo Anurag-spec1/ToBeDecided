@@ -74,3 +74,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
     implementation("io.github.jan-tennert.supabase:postgrest-kt")
 }
+
+tasks.named("preBuild") {
+    dependsOn(rootProject.tasks.named("startApi"))
+}
